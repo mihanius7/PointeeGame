@@ -1,5 +1,6 @@
 package task.model;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +13,10 @@ public class Board {
 	private List<BoardSquare> squares;
 	private Paintable image;
 	private Game game;
-	private int x;
-	private int y;
-	private int size;
-	private int squareSize;
+	int cornerX;
+	int cornerY;
+	int size;
+	int squareSize;
 
 	public Board(int squaresOnSide, Game game) {
 		super();
@@ -28,22 +29,22 @@ public class Board {
 	}
 
 	private void centerInViewport() {
-		this.x = GameFrame.VIEW_WIDTH / 2 - size / 2;
-		this.y = GameFrame.VIEW_HEIGHT / 2 - size / 2;
+		this.cornerX = GameFrame.VIEW_WIDTH / 2 - size / 2;
+		this.cornerY = GameFrame.VIEW_HEIGHT / 2 - size / 2;
 	}
 
 	private void generateBoard(int squaresOnSide) {
 		squareSize = this.size / squaresOnSide;
-		System.out.println("board x " + x);
-		System.out.println("board y " + y);
+		System.out.println("board x " + cornerX);
+		System.out.println("board y " + cornerY);
 		System.out.println("board size " + size);
 		System.out.println("square size " + squareSize);
 		for (int j = 0; j < squaresOnSide; j++) {
 			for (int i = 0; i < squaresOnSide; i++) {
-				int sqX = this.x + squareSize * i + squareSize / 2;
-				int sqY = this.y + squareSize * j + squareSize / 2;
+				int sqX = this.cornerX + squareSize * i + squareSize / 2;
+				int sqY = this.cornerY + squareSize * j + squareSize / 2;
 				BoardSquare sq = new BoardSquare(sqX, sqY);
-				sq.addOnePointee(game.getBird());
+				sq.addOnePointee(this.game);
 				squares.add(sq);
 			}
 		}
@@ -65,6 +66,20 @@ public class Board {
 		for (BoardSquare bs : squares) {
 			bs.movePointees();
 		}
+	}
+
+	public BoardSquare defineNearestSquare(double x, double y) {
+		double minDistanceSq = Double.MAX_VALUE;
+		double distanceSq;
+		BoardSquare nearest = squares.get(0);
+		for (BoardSquare bs : squares) {
+			distanceSq = Point2D.distanceSq(x, y, bs.x, bs.y);
+			if (distanceSq < minDistanceSq) {
+				minDistanceSq = distanceSq;
+				nearest = bs;
+			}
+		}
+		return nearest;
 	}
 
 }

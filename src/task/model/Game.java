@@ -5,15 +5,15 @@ import javax.swing.JFrame;
 import task.view.GameFrame;
 
 public class Game {
-	private Board board;
-	private Bird bird;
+	Board board;
+	Bird bird;
 	private int roundsNumber;
 	private boolean isPlaying;
 	public static final int ROUNDS_MAX_NUMBER = 25;
 
 	public Game() {
-		bird = new Bird();
 		board = new Board(15, this);
+		bird = new Bird(board);
 		GameFrame gf = new GameFrame(this);
 		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gf.setVisible(true);

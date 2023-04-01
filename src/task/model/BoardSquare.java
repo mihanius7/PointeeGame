@@ -23,8 +23,8 @@ public class BoardSquare {
 		return y;
 	}
 	
-	public boolean addOnePointee(Bird bird) {
-		return pointees.add(new Pointee(this, bird));
+	public boolean addOnePointee(Game game) {
+		return pointees.add(new Pointee(this, game));
 	}
 
 	public List<Pointee> getPointees() {
@@ -36,9 +36,9 @@ public class BoardSquare {
 	}
 
 	public void movePointees() {
-		for (Pointee p : pointees) {
-			p.move();
+		for (int i = 0; i < pointees.size();i++) {
+			pointees.get(i).move();
 		}
 	}
-	
+
 }

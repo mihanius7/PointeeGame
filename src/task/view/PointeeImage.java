@@ -7,13 +7,12 @@ import task.model.Pointee;
 
 public class PointeeImage implements Paintable {
 	public static final int POINTEE_SIZE = 8;
-	private final Color color;
+	private static Color color = Color.BLUE;
 	private Pointee pointee;
 
 	public PointeeImage(Pointee pointee) {
 		super();
 		this.pointee = pointee;
-		this.color = new Color((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
 	}
 
 	@Override

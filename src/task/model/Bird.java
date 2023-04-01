@@ -14,16 +14,12 @@ public class Bird {
 	double angle;
 	boolean isFlying;
 	Paintable image;
+	private Board board;
 
-	public Bird() {
+	public Bird(Board board) {
 		super();
 		this.image = new BirdImage(this);
-	}
-
-	public Point2D.Float getLocation() {
-		Point2D.Float location = new Point2D.Float();
-		location.setLocation(x, y);
-		return location;
+		this.board = board;
 	}
 
 	public double getX() {
@@ -47,14 +43,14 @@ public class Bird {
 			double dt = GameViewport.TIME_STEP / 1000.0;
 			x += dt * velocity * Math.cos(angle / 180 * Math.PI);
 			y += dt * velocity * Math.sin(angle / 180 * Math.PI);
-			if (x > GameFrame.VIEW_WIDTH || x < 0 || y > GameFrame.VIEW_HEIGHT || y < 0) {
+			if (x > board.cornerX + board.size + board.squareSize || x < board.cornerX - board.squareSize || y > board.cornerY + board.size + board.squareSize || y < board.cornerY - board.squareSize) {
 				isFlying = false;
 			}
 		}
 	}
 
 	public void launch() {
-		x = 0;
+		x = board.cornerX - board.squareSize;
 		y = Math.random() * GameFrame.VIEW_WIDTH;
 		velocity = Math.random() * 25 + 75;
 		angle = Math.random() * 90 - 45;
