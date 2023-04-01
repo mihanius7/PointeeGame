@@ -9,8 +9,8 @@ import task.view.PointeeImage;
 public class Pointee {
 	private BoardSquare ownSquare;
 	private Game game;
-	public static double PANIC_DISTANCE = 100;
-	public static double MIN_AMPLITUDE = 1;
+	public static double PANIC_DISTANCE = 200;
+	public static double MIN_AMPLITUDE = 0.7;
 	double x;
 	double y;
 	double time;
@@ -25,7 +25,7 @@ public class Pointee {
 		this.ownSquare = square;
 		centerInSquare();
 		image = new PointeeImage(this);
-		oscillationFrequency = Math.random() * 5 + 2;
+		oscillationFrequency = Math.random() * 2 + 2;
 	}
 
 	public void centerInSquare() {

@@ -52,7 +52,7 @@ public class Bird {
 	public void launch() {
 		x = board.cornerX - board.squareSize;
 		y = Math.random() * GameFrame.VIEW_WIDTH;
-		velocity = Math.random() * 25 + 75;
+		velocity = 200;
 		angle = Math.random() * 90 - 45;
 		isFlying = true;
 	}

@@ -12,7 +12,7 @@ import javax.swing.Timer;
 import task.model.Game;
 
 public class GameViewport extends JPanel implements ActionListener {
-	public static final int TIME_STEP = 20;
+	public static final int TIME_STEP = 25;
 	private Timer timer;
 	private Game game;
 
