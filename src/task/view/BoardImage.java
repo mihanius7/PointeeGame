@@ -21,7 +21,7 @@ public class BoardImage implements Paintable {
 			int y = bs.getY();
 			g.setColor(Color.GRAY);
 			g.drawRect(x - board.getSquareSize() / 2, y - board.getSquareSize() / 2, board.getSquareSize(), board.getSquareSize());
-			g.drawString(String.valueOf(bs.getPointees().size()), x, y);
+			g.drawString(String.valueOf(bs.getPointees().size()), x + board.getSquareSize() / 2 - 8, y + board.getSquareSize() / 2 - 4);
 			for (int n = 0; n < bs.getPointees().size(); n++) {
 				Pointee p = bs.getPointees().get(n);
 				p.getImage().paintOn(g);

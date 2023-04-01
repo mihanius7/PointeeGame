@@ -72,9 +72,8 @@ public class Pointee {
 	private void checkJumpOff() {
 		double threshold = game.getBoard().getSquareSize() / 2;
 		if (Math.abs(x - ownSquare.x) > threshold || Math.abs(y - ownSquare.y) > threshold) {
-			BoardSquare oldOwner = ownSquare;
+			ownSquare.getPointees().remove(this);
 			ownSquare = game.getBoard().defineNearestSquare(x, y);
-			oldOwner.getPointees().remove(this);
 			ownSquare.getPointees().add(this);
 			System.out.println("Own square changed!");
 		}
