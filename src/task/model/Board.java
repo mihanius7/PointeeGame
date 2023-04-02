@@ -4,9 +4,9 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import task.view.BoardImage;
 import task.view.GameFrame;
-import task.view.Paintable;
+import task.view.paintables.BoardImage;
+import task.view.paintables.Paintable;
 
 public class Board {
 	private static final int DEFAULT_SIZE = 600;

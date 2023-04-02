@@ -2,10 +2,10 @@ package task.model;
 
 import java.awt.geom.Point2D;
 
-import task.view.BirdImage;
 import task.view.GameFrame;
 import task.view.GameViewport;
-import task.view.Paintable;
+import task.view.paintables.BirdImage;
+import task.view.paintables.Paintable;
 
 public class Bird {
 	double x;

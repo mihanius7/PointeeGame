@@ -3,8 +3,8 @@ package task.model;
 import java.awt.geom.Point2D;
 
 import task.view.GameViewport;
-import task.view.Paintable;
-import task.view.PointeeImage;
+import task.view.paintables.Paintable;
+import task.view.paintables.PointeeImage;
 
 public class Pointee {
 	private BoardSquare ownSquare;

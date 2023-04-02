@@ -1,4 +1,4 @@
-package task.view;
+package task.view.paintables;
 
 import java.awt.Graphics;
 
