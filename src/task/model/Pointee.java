@@ -75,7 +75,6 @@ public class Pointee {
 			ownSquare.getPointees().remove(this);
 			ownSquare = game.getBoard().defineNearestSquare(x, y);
 			ownSquare.getPointees().add(this);
-			System.out.println("Own square changed!");
 		}
 	}
 

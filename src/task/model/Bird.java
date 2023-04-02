@@ -43,15 +43,19 @@ public class Bird {
 			double dt = GameViewport.TIME_STEP / 1000.0;
 			x += dt * velocity * Math.cos(angle / 180 * Math.PI);
 			y += dt * velocity * Math.sin(angle / 180 * Math.PI);
-			if (x > board.cornerX + board.size + board.squareSize || x < board.cornerX - board.squareSize || y > board.cornerY + board.size + board.squareSize || y < board.cornerY - board.squareSize) {
+			if (isOut()) {
 				isFlying = false;
 			}
 		}
 	}
+	
+	private boolean isOut() {
+		return (x > board.cornerX + board.size + board.squareSize || x < board.cornerX - board.squareSize || y > board.cornerY + board.size + board.squareSize || y < board.cornerY - board.squareSize);
+	}
 
 	public void launch() {
 		x = board.cornerX - board.squareSize;
-		y = Math.random() * GameFrame.VIEW_WIDTH;
+		y = Math.random() * GameFrame.VIEW_HEIGHT;
 		velocity = 200;
 		angle = Math.random() * 90 - 45;
 		isFlying = true;

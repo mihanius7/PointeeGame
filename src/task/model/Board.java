@@ -20,7 +20,7 @@ public class Board {
 
 	public Board(int squaresOnSide, Game game) {
 		super();
-		this.size = (int) Math.min(DEFAULT_SIZE, GameFrame.VIEW_HEIGHT);
+		this.size = (int) Math.min(DEFAULT_SIZE, GameFrame.VIEW_HEIGHT - 40);
 		centerInViewport();
 		this.squares = new ArrayList<>();
 		this.game = game;
@@ -29,7 +29,7 @@ public class Board {
 	}
 
 	private void centerInViewport() {
-		this.cornerX = GameFrame.VIEW_WIDTH / 2 - size / 2;
+		this.cornerX = GameFrame.VIEW_WIDTH / 2 - size / 2 - 75;
 		this.cornerY = GameFrame.VIEW_HEIGHT / 2 - size / 2;
 	}
 
