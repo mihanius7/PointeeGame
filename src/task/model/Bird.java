@@ -52,7 +52,7 @@ public class Bird {
 		return (x > board.cornerX + board.size + board.squareSize || x < board.cornerX - board.squareSize || y > board.cornerY + board.size + board.squareSize || y < board.cornerY - board.squareSize);
 	}
 	
-	private void toStartPostion() {
+	public void toStartPostion() {
 		x = board.cornerX - board.squareSize;
 		y = Math.random() * GameFrame.VIEW_HEIGHT;
 		velocity = 200;
@@ -61,7 +61,6 @@ public class Bird {
 	}
 
 	public void launch() {
-		toStartPostion();
 		status = BirdStatus.FLYING;
 	}
 

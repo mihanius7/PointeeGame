@@ -24,7 +24,7 @@ public class Game {
 
 	public void beginGame() {
 		roundsNumber = 0;
-		bird.launch();
+		bird.toStartPostion();
 		isPlaying = true;
 	}
 
@@ -56,6 +56,7 @@ public class Game {
 		if (bird.getStatus() == BirdStatus.FINISHED) {
 			roundsNumber++;
 			if (roundsNumber < ROUNDS_MAX_NUMBER) {
+				bird.toStartPostion();
 			} else {
 				System.out.println("Game finished!");
 				isPlaying = false;
