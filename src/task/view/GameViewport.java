@@ -34,12 +34,16 @@ public class GameViewport extends JPanel implements ActionListener {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, GameFrame.VIEW_WIDTH, GameFrame.VIEW_HEIGHT);
+		paintBackground(g);
 		game.getBoard().getImage().paintOn(g);
 		game.getBird().getImage().paintOn(g);
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();
+	}
+	
+	private void paintBackground(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, getWidth(), getHeight());
 	}
 
 }

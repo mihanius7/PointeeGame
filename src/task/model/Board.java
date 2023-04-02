@@ -4,9 +4,9 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import task.view.BoardImage;
 import task.view.GameFrame;
-import task.view.Paintable;
+import task.view.paintables.BoardImage;
+import task.view.paintables.Paintable;
 
 public class Board {
 	private static final int DEFAULT_SIZE = 600;
@@ -20,7 +20,7 @@ public class Board {
 
 	public Board(int squaresOnSide, Game game) {
 		super();
-		this.size = (int) Math.min(DEFAULT_SIZE, GameFrame.VIEW_HEIGHT);
+		this.size = (int) Math.min(DEFAULT_SIZE, GameFrame.VIEW_HEIGHT - 40);
 		centerInViewport();
 		this.squares = new ArrayList<>();
 		this.game = game;
@@ -29,7 +29,7 @@ public class Board {
 	}
 
 	private void centerInViewport() {
-		this.cornerX = GameFrame.VIEW_WIDTH / 2 - size / 2;
+		this.cornerX = GameFrame.VIEW_WIDTH / 2 - size / 2 - 75;
 		this.cornerY = GameFrame.VIEW_HEIGHT / 2 - size / 2;
 	}
 

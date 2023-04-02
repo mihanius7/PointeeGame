@@ -2,14 +2,16 @@ package task.model;
 
 import javax.swing.JFrame;
 
+import task.view.GameControls;
 import task.view.GameFrame;
 
 public class Game {
 	Board board;
 	Bird bird;
+	GameControls controls;
 	private int roundsNumber;
 	private boolean isPlaying;
-	public static final int ROUNDS_MAX_NUMBER = 25;
+	public static final int ROUNDS_MAX_NUMBER = 5;
 
 	public Game() {
 		board = new Board(15, this);
@@ -22,7 +24,7 @@ public class Game {
 
 	public void beginGame() {
 		roundsNumber = 0;
-		bird.launch();
+		bird.toStartPostion();
 		isPlaying = true;
 	}
 
@@ -46,17 +48,22 @@ public class Game {
 		}
 	}
 
+	public void setControls(GameControls controls) {
+		this.controls = controls;
+	}
+
 	public void checkBirdStatus() {
-		if (!bird.isFlying) {
+		if (bird.getStatus() == BirdStatus.FINISHED) {
+			roundsNumber++;
 			if (roundsNumber < ROUNDS_MAX_NUMBER) {
-				System.out.println("Round " + (roundsNumber + 1) + " finished.");
-				roundsNumber++;
-				bird.launch();
+				bird.toStartPostion();
 			} else {
 				System.out.println("Game finished!");
 				isPlaying = false;
 			}
 		}
+		if (controls != null)
+			controls.updateControls();
 	}
 
 }
