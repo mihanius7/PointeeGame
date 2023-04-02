@@ -53,16 +53,14 @@ public class Game {
 	}
 
 	public void checkBirdStatus() {
-		if (!bird.isFlying) {
+		if (bird.getStatus() == BirdStatus.FINISHED) {
 			roundsNumber++;
 			if (roundsNumber < ROUNDS_MAX_NUMBER) {
-				bird.launch();
 			} else {
 				System.out.println("Game finished!");
 				isPlaying = false;
 			}
 		}
-
 		if (controls != null)
 			controls.updateControls();
 	}

@@ -1,7 +1,5 @@
 package task.model;
 
-import java.awt.geom.Point2D;
-
 import task.view.GameFrame;
 import task.view.GameViewport;
 import task.view.paintables.BirdImage;
@@ -12,7 +10,7 @@ public class Bird {
 	double y;
 	double velocity;
 	double angle;
-	boolean isFlying;
+	BirdStatus status;
 	Paintable image;
 	private Board board;
 
@@ -20,6 +18,7 @@ public class Bird {
 		super();
 		this.image = new BirdImage(this);
 		this.board = board;
+		status = BirdStatus.CREATED;
 	}
 
 	public double getX() {
@@ -39,12 +38,12 @@ public class Bird {
 	}
 
 	public void fly() {
-		if (isFlying) {
+		if (status == BirdStatus.FLYING) {
 			double dt = GameViewport.TIME_STEP / 1000.0;
 			x += dt * velocity * Math.cos(angle / 180 * Math.PI);
 			y += dt * velocity * Math.sin(angle / 180 * Math.PI);
 			if (isOut()) {
-				isFlying = false;
+				status = BirdStatus.FINISHED;
 			}
 		}
 	}
@@ -52,17 +51,26 @@ public class Bird {
 	private boolean isOut() {
 		return (x > board.cornerX + board.size + board.squareSize || x < board.cornerX - board.squareSize || y > board.cornerY + board.size + board.squareSize || y < board.cornerY - board.squareSize);
 	}
-
-	public void launch() {
+	
+	private void toStartPostion() {
 		x = board.cornerX - board.squareSize;
 		y = Math.random() * GameFrame.VIEW_HEIGHT;
 		velocity = 200;
 		angle = Math.random() * 90 - 45;
-		isFlying = true;
+		status = BirdStatus.READY_TO_FLY;
+	}
+
+	public void launch() {
+		toStartPostion();
+		status = BirdStatus.FLYING;
 	}
 
 	public Paintable getImage() {
 		return image;
+	}
+
+	public BirdStatus getStatus() {
+		return status;
 	}
 
 }
