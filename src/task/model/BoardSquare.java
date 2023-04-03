@@ -40,5 +40,9 @@ public class BoardSquare {
 			pointees.get(i).move();
 		}
 	}
+	
+	public Coupon getCoupon() {
+		return new Coupon(pointees.size());		
+	}
 
 }
