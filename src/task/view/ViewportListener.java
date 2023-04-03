@@ -15,11 +15,14 @@ public class ViewportListener extends MouseAdapter {
 	public ViewportListener(Game game) {
 		this.game = game;
 	}
+	
+	public void mousePressed(MouseEvent e) {
+		game.getBird().setXY(e.getX(), e.getY());
+	}
 
 	public void mouseReleased(MouseEvent e) {
 		dx = e.getX() - (int) game.getBird().getX();
 		dy = e.getY() - (int) game.getBird().getY();
 		game.getBird().setVelocity(dx, dy);
-		System.out.println("dx = " + dx + ", dy = " + dy);
 	}
 }

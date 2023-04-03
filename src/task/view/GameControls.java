@@ -24,7 +24,7 @@ public class GameControls extends JPanel {
 		game.setControls(this);
 
 		l1 = new JLabel("Rounds played: 0");
-		l1.setPreferredSize(new Dimension(140, 24));
+		l1.setPreferredSize(new Dimension(140, 32));
 		add(l1);
 
 		b1 = new JButton("Launch bird");

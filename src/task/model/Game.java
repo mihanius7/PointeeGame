@@ -14,21 +14,23 @@ public class Game {
 	GameControls controls;
 	private int roundsPlayed;
 	private boolean isPlaying;
+	public static final int BOARD_SIZE = 15;
 	public static final int ROUNDS_MAX_NUMBER = 100;
-	public static final int[] ROUNDS_FOR_REDEEM = { 25, 50, 100 };
+	public static final int[] ROUNDS_FOR_REDEEM = { 2, 50, 100 };
 
 	public Game() {
-		board = new Board(15, this);
+		newGame();
 		bird = new Bird(board);
+		bird.toStartPostion();
 		GameFrame gf = new GameFrame(this);
 		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gf.setVisible(true);
-		beginGame();
+
 	}
 
-	public void beginGame() {
+	public void newGame() {
+		board = new Board(BOARD_SIZE, this);
 		roundsPlayed = 0;
-		bird.toStartPostion();
 		isPlaying = true;
 	}
 
@@ -92,6 +94,7 @@ public class Game {
 			JOptionPane.showInternalMessageDialog(null,
 					"You redeemed a coupon with worth " + coupon.getWorth() + " points.", "Condratulations",
 					JOptionPane.INFORMATION_MESSAGE);
+			newGame();
 		} else {
 			JOptionPane.showInternalMessageDialog(null,
 					"You can redeem a coupon only after " + Arrays.toString(ROUNDS_FOR_REDEEM) + " rounds.", "Not now jet",
