@@ -35,10 +35,6 @@ public class Board {
 
 	private void generateBoard(int squaresOnSide) {
 		squareSize = this.size / squaresOnSide;
-		System.out.println("board x " + cornerX);
-		System.out.println("board y " + cornerY);
-		System.out.println("board size " + size);
-		System.out.println("square size " + squareSize);
 		for (int j = 0; j < squaresOnSide; j++) {
 			for (int i = 0; i < squaresOnSide; i++) {
 				int sqX = this.cornerX + squareSize * i + squareSize / 2;
@@ -68,18 +64,37 @@ public class Board {
 		}
 	}
 
+	public boolean isPointAboveBoard(double x, double y) {
+		BoardSquare bs = defineNearestSquare(x, y);
+		return Point2D.distance(bs.x, bs.y, x, y) < squareSize;
+	}
+
 	public BoardSquare defineNearestSquare(double x, double y) {
 		double minDistanceSq = Double.MAX_VALUE;
-		double distanceSq;
-		BoardSquare nearest = squares.get(0);
-		for (BoardSquare bs : squares) {
-			distanceSq = Point2D.distanceSq(x, y, bs.x, bs.y);
-			if (distanceSq < minDistanceSq) {
-				minDistanceSq = distanceSq;
-				nearest = bs;
+		double currentDistanceSq;
+		BoardSquare nearestSquare = squares.get(0);
+		for (BoardSquare square : squares) {
+			currentDistanceSq = Point2D.distanceSq(x, y, square.x, square.y);
+			if (currentDistanceSq < minDistanceSq) {
+				minDistanceSq = currentDistanceSq;
+				nearestSquare = square;
 			}
 		}
-		return nearest;
+		return nearestSquare;
+	}
+
+	public BoardSquare defineBestSquare() {
+		int maxPointsSquare = 0;
+		int currentSquare;
+		BoardSquare bestSquare = squares.get(0);
+		for (BoardSquare square : squares) {
+			currentSquare = square.getPoints();
+			if (currentSquare > maxPointsSquare) {
+				maxPointsSquare = currentSquare;
+				bestSquare = square;
+			}
+		}
+		return bestSquare;
 	}
 
 }

@@ -16,6 +16,7 @@ public class Pointee {
 	double time;
 	double oscillationAmplitude = MIN_AMPLITUDE;
 	double oscillationFrequency;
+	short oscillationSign;
 	static double jumpMaxDistance;
 	private Paintable image;
 
@@ -25,7 +26,8 @@ public class Pointee {
 		this.ownSquare = square;
 		centerInSquare();
 		image = new PointeeImage(this);
-		oscillationFrequency = Math.random() * 2 + 2;
+		oscillationFrequency = Math.random() * 2 + 1;
+		oscillationSign = (short) ((Math.random() - 1 > 0) ? 1 : -1);
 	}
 
 	public void centerInSquare() {
@@ -50,8 +52,8 @@ public class Pointee {
 	}
 
 	public void move() {
-		x = ownSquare.x + oscillationAmplitude * Math.cos(2 * Math.PI * oscillationFrequency * time / 1000);
-		y = ownSquare.y + oscillationAmplitude * Math.sin(2 * Math.PI * oscillationFrequency * time / 1000);
+		x = ownSquare.x + oscillationAmplitude * Math.cos(2 * Math.PI * oscillationFrequency * time / 1000) * oscillationSign;
+		y = ownSquare.y + oscillationAmplitude * Math.sin(2 * Math.PI * oscillationFrequency * 0.8 * time / 1000) * oscillationSign;
 		time += GameViewport.TIME_STEP;
 		watchForBird();
 	}
