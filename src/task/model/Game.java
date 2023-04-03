@@ -15,7 +15,7 @@ public class Game {
 	private int roundsPlayed;
 	private boolean isPlaying;
 	public static final int ROUNDS_MAX_NUMBER = 100;
-	public static final int[] ROUNDS_FOR_REDEEM = { 25, 50, 100 };
+	public static final int[] ROUNDS_FOR_REDEEM = { 2, 50, 100 };
 
 	public Game() {
 		board = new Board(15, this);
@@ -49,6 +49,8 @@ public class Game {
 			bird.fly();
 			board.alive();
 			checkBirdStatus();
+			if (controls != null)
+				controls.updateControls();
 		}
 	}
 
@@ -66,8 +68,6 @@ public class Game {
 				isPlaying = false;
 			}
 		}
-		if (controls != null)
-			controls.updateControls();
 	}
 
 	public boolean isPlaying() {
@@ -82,6 +82,7 @@ public class Game {
 				break;
 			}
 		}
+		System.out.println("Permitted? - " + permitted);
 		return permitted;
 	}
 

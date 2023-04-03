@@ -1,5 +1,6 @@
 package task.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +34,7 @@ public class GameControls extends JPanel {
 			}
 		});
 		b1.setPreferredSize(new Dimension(140, 24));
+		b1.setBackground(Color.LIGHT_GRAY);
 		add(b1);
 
 		b2 = new JButton("Redeem the best");
@@ -49,6 +51,10 @@ public class GameControls extends JPanel {
 		l1.setText("Rounds played: " + game.getRoundsNumber());
 		b1.setEnabled(game.getBird().getStatus() != BirdStatus.FLYING && game.isPlaying());
 		b2.setEnabled(game.getBird().getStatus() != BirdStatus.FLYING);
+		if (game.isRedeemPermitted() && game.getBird().getStatus() != BirdStatus.FLYING)
+			b2.setBackground(Color.GREEN);
+		else
+			b2.setBackground(Color.LIGHT_GRAY);
 	}
 
 }
