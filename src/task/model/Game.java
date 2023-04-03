@@ -11,7 +11,8 @@ public class Game {
 	GameControls controls;
 	private int roundsNumber;
 	private boolean isPlaying;
-	public static final int ROUNDS_MAX_NUMBER = 5;
+	public static final int ROUNDS_MAX_NUMBER = 100;
+	public static final int[] ROUNDS_FOR_REDEEM = {25, 50, 100};
 
 	public Game() {
 		board = new Board(15, this);
@@ -65,5 +66,9 @@ public class Game {
 		if (controls != null)
 			controls.updateControls();
 	}
+
+	public boolean isPlaying() {
+		return isPlaying;
+	}	
 
 }

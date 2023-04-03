@@ -37,7 +37,7 @@ public class GameControls extends JPanel {
 	
 	public void updateControls() {
 		l1.setText("Rounds played: " + game.getRoundsNumber());
-		b1.setEnabled(game.getBird().getStatus() != BirdStatus.FLYING);
+		b1.setEnabled(game.getBird().getStatus() != BirdStatus.FLYING && game.isPlaying());
 	}
 
 }

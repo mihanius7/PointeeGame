@@ -70,12 +70,12 @@ public class Board {
 
 	public BoardSquare defineNearestSquare(double x, double y) {
 		double minDistanceSq = Double.MAX_VALUE;
-		double distanceSq;
+		double currentDistanceSq;
 		BoardSquare nearest = squares.get(0);
 		for (BoardSquare bs : squares) {
-			distanceSq = Point2D.distanceSq(x, y, bs.x, bs.y);
-			if (distanceSq < minDistanceSq) {
-				minDistanceSq = distanceSq;
+			currentDistanceSq = Point2D.distanceSq(x, y, bs.x, bs.y);
+			if (currentDistanceSq < minDistanceSq) {
+				minDistanceSq = currentDistanceSq;
 				nearest = bs;
 			}
 		}
