@@ -40,18 +40,19 @@ public class Bird {
 	public void fly() {
 		if (status == BirdStatus.FLYING) {
 			double dt = GameViewport.TIME_STEP / 1000.0;
-			x += dt * velocity * Math.cos(angle / 180 * Math.PI);
-			y += dt * velocity * Math.sin(angle / 180 * Math.PI);
+			x += dt * velocity * Math.cos(angle);
+			y += dt * velocity * Math.sin(angle);
 			if (isOut()) {
 				status = BirdStatus.FINISHED;
 			}
 		}
 	}
-	
+
 	private boolean isOut() {
-		return (x > board.cornerX + board.size + board.squareSize || x < board.cornerX - board.squareSize || y > board.cornerY + board.size + board.squareSize || y < board.cornerY - board.squareSize);
+		return (x > board.cornerX + board.size + board.squareSize || x < board.cornerX - board.squareSize
+				|| y > board.cornerY + board.size + board.squareSize || y < board.cornerY - board.squareSize);
 	}
-	
+
 	public void toStartPostion() {
 		x = board.cornerX - board.squareSize;
 		y = Math.random() * GameFrame.VIEW_HEIGHT;
@@ -70,6 +71,13 @@ public class Bird {
 
 	public BirdStatus getStatus() {
 		return status;
+	}
+
+	public void setVelocity(int vx, int vy) {
+		velocity = Math.sqrt(vx * vx + vy * vy);
+		angle = Math.atan2(vy, vx);
+		System.out.println("Bird new velocity " + velocity);
+		System.out.println("Bird new angle " + angle);
 	}
 
 }

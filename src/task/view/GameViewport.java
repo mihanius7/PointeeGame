@@ -7,6 +7,8 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,6 +29,8 @@ public class GameViewport extends JPanel implements ActionListener {
 
 		timer = new Timer(TIME_STEP, this);
 		timer.start();
+		
+		addMouseListener(new ViewportListener(game));
 	}
 
 	@Override
@@ -42,9 +46,9 @@ public class GameViewport extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHints(rh);
-		paintBackground(g);
-		game.getBoard().getImage().paintOn(g);
-		game.getBird().getImage().paintOn(g);
+		paintBackground(g2d);
+		game.getBoard().getImage().paintOn(g2d);
+		game.getBird().getImage().paintOn(g2d);
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();
 	}
