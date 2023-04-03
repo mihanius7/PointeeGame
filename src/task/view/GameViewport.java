@@ -31,6 +31,7 @@ public class GameViewport extends JPanel implements ActionListener {
 		timer.start();
 		
 		addMouseListener(new ViewportListener(game));
+		addMouseMotionListener(new ViewportListener(game));
 	}
 
 	@Override

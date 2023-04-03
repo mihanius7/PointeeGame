@@ -20,7 +20,7 @@ public class ViewportListener extends MouseAdapter {
 		game.getBird().setXY(e.getX(), e.getY());
 	}
 
-	public void mouseReleased(MouseEvent e) {
+	public void mouseDragged(MouseEvent e) {
 		dx = e.getX() - (int) game.getBird().getX();
 		dy = e.getY() - (int) game.getBird().getY();
 		game.getBird().setVelocity(dx, dy);
