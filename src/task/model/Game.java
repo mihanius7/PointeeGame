@@ -16,7 +16,7 @@ public class Game {
 	private boolean isPlaying;
 	public static final int BOARD_SIZE = 15;
 	public static final int ROUNDS_MAX_NUMBER = 100;
-	public static final int[] ROUNDS_FOR_REDEEM = { 2, 50, 100 };
+	public static final int[] ROUNDS_FOR_REDEEM = { 25, 50, 100 };
 
 	public Game() {
 		newGame();
@@ -25,7 +25,7 @@ public class Game {
 		GameFrame gf = new GameFrame(this);
 		gf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gf.setVisible(true);
-
+		newGameMessage();
 	}
 
 	public void newGame() {
@@ -95,12 +95,18 @@ public class Game {
 					"You redeemed a coupon with worth " + coupon.getWorth() + " points.", "Condratulations",
 					JOptionPane.INFORMATION_MESSAGE);
 			newGame();
+			newGameMessage();
 		} else {
 			JOptionPane.showInternalMessageDialog(null,
-					"You can redeem a coupon only after " + Arrays.toString(ROUNDS_FOR_REDEEM) + " rounds.", "Not now jet",
-					JOptionPane.WARNING_MESSAGE);
+					"You can redeem a coupon only after " + Arrays.toString(ROUNDS_FOR_REDEEM) + " rounds.",
+					"Not now jet", JOptionPane.WARNING_MESSAGE);
 		}
 		return coupon;
+	}
+
+	private void newGameMessage() {
+		JOptionPane.showInternalMessageDialog(null, "Send a bird in any direction by mouse clicking and dragging",
+				"New game", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }

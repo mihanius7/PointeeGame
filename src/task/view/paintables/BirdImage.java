@@ -7,7 +7,7 @@ import task.model.Bird;
 
 public class BirdImage implements Paintable {
 	public static final int BIRD_SIZE = 15;
-	public static final int BIRD_VECTOR_LENGTH = 75;
+	public static final int BIRD_VECTOR_MAX_LENGTH = 150;
 	private Bird bird;
 
 	public BirdImage(Bird b) {
@@ -19,13 +19,14 @@ public class BirdImage implements Paintable {
 		g.setColor(Color.RED);
 		g.fillOval((int) Math.round(bird.getX() - BIRD_SIZE / 2), (int) Math.round(bird.getY() - BIRD_SIZE / 2),
 				BIRD_SIZE, BIRD_SIZE);
-
 	}
+
 	private void drawVelocityVector(Graphics g) {
+		int vectorLength = (int) Math.min(BIRD_VECTOR_MAX_LENGTH, bird.getVelocity());
 		g.setColor(Color.LIGHT_GRAY);
 		drawArrowLine(g, (int) bird.getX(), (int) bird.getY(),
-				(int) (bird.getX() + BIRD_VECTOR_LENGTH * Math.cos(bird.getAngle())),
-				(int) (bird.getY() + BIRD_VECTOR_LENGTH * Math.sin(bird.getAngle())), 12, 5);
+				(int) (bird.getX() + vectorLength * Math.cos(bird.getAngle())),
+				(int) (bird.getY() + vectorLength * Math.sin(bird.getAngle())), 12, 5);
 	}
 
 	private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h) {
