@@ -64,6 +64,11 @@ public class Board {
 		}
 	}
 
+	public boolean isPointAboveBoard(double x, double y) {
+		BoardSquare bs = defineNearestSquare(x, y);
+		return Point2D.distance(bs.x, bs.y, x, y) < squareSize;
+	}
+
 	public BoardSquare defineNearestSquare(double x, double y) {
 		double minDistanceSq = Double.MAX_VALUE;
 		double currentDistanceSq;
@@ -77,7 +82,7 @@ public class Board {
 		}
 		return nearestSquare;
 	}
-	
+
 	public BoardSquare defineBestSquare() {
 		int maxPointsSquare = 0;
 		int currentSquare;
@@ -89,7 +94,7 @@ public class Board {
 				bestSquare = square;
 			}
 		}
-		return bestSquare;		
+		return bestSquare;
 	}
 
 }

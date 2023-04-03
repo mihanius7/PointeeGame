@@ -51,7 +51,7 @@ public class Bird {
 		}
 	}
 
-	private boolean isOutOfBoundary() {		
+	private boolean isOutOfBoundary() {
 		return (x > board.cornerX + board.size + boundaryMargin || x < board.cornerX - boundaryMargin
 				|| y > board.cornerY + board.size + boundaryMargin || y < board.cornerY - boundaryMargin);
 	}
@@ -82,8 +82,10 @@ public class Bird {
 	}
 
 	public void setXY(int newX, int newY) {
-		x = newX;
-		y = newY;
+		if (!board.isPointAboveBoard(newX, newY)) {
+			x = newX;
+			y = newY;
+		}
 	}
 
 }
