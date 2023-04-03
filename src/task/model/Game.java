@@ -82,7 +82,6 @@ public class Game {
 				break;
 			}
 		}
-		System.out.println("Permitted? - " + permitted);
 		return permitted;
 	}
 
