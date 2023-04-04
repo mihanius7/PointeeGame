@@ -97,4 +97,12 @@ public class Board {
 		return bestSquare;
 	}
 
+	public int defineOverallPoints() {
+		int points = 0;
+		for (int i = 0; i < squares.size(); i++) {
+			points += squares.get(i).getPoints();
+		}
+		return points;
+	}
+
 }

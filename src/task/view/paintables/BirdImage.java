@@ -16,7 +16,7 @@ public class BirdImage implements Paintable {
 
 	public void paintOn(Graphics g) {
 		drawVelocityVector(g);
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		g.fillOval((int) Math.round(bird.getX() - BIRD_SIZE / 2), (int) Math.round(bird.getY() - BIRD_SIZE / 2),
 				BIRD_SIZE, BIRD_SIZE);
 	}

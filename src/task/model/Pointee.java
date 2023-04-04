@@ -10,11 +10,13 @@ public class Pointee {
 	private BoardSquare ownSquare;
 	private Game game;
 	public static double PANIC_DISTANCE = 200;
-	public static double MIN_AMPLITUDE = 0.7;
+	public static double MIN_AMPLITUDE = 0;
+	public static double MIN_FREQUENCY = 1;
+	public static double MAX_FREQUENCY = 7;
 	double x;
 	double y;
-	double time;
-	double oscillationAmplitude = MIN_AMPLITUDE;
+	static double time;
+	double oscillationAmplitude;
 	double oscillationFrequency;
 	short oscillationSign;
 	static double jumpMaxDistance;
@@ -24,15 +26,20 @@ public class Pointee {
 		super();
 		this.game = game;
 		this.ownSquare = square;
-		centerInSquare();
 		image = new PointeeImage(this);
-		oscillationFrequency = Math.random() * 2 + 1;
-		oscillationSign = (short) ((Math.random() - 1 > 0) ? 1 : -1);
+		oscillationSign = (short) ((Math.random() > 0.5) ? 1 : -1);
+		centerInSquare();
 	}
 
 	public void centerInSquare() {
 		this.x = ownSquare.x;
 		this.y = ownSquare.y;
+		calm();
+	}
+
+	private void calm() {
+		oscillationFrequency = Math.random() * (MAX_FREQUENCY - MIN_FREQUENCY) + MIN_FREQUENCY;
+		oscillationAmplitude = MIN_AMPLITUDE;
 	}
 
 	public BoardSquare getSquare() {
@@ -52,10 +59,12 @@ public class Pointee {
 	}
 
 	public void move() {
-		x = ownSquare.x + oscillationAmplitude * Math.cos(2 * Math.PI * oscillationFrequency * time / 1000) * oscillationSign;
-		y = ownSquare.y + oscillationAmplitude * Math.sin(2 * Math.PI * oscillationFrequency * 0.8 * time / 1000) * oscillationSign;
-		time += GameViewport.TIME_STEP;
 		watchForBird();
+		time += GameViewport.TIME_STEP;
+		x = ownSquare.x
+				+ oscillationAmplitude * Math.cos(Math.toRadians(oscillationFrequency) * time / 1000 * oscillationSign);
+		y = ownSquare.y
+				+ oscillationAmplitude * Math.sin(Math.toRadians(oscillationFrequency) * time / 1000 * oscillationSign);
 	}
 
 	private void watchForBird() {
@@ -63,11 +72,11 @@ public class Pointee {
 		double panicAmplitude;
 		jumpMaxDistance = game.getBoard().getSquareSize();
 		if (birdDistance <= PANIC_DISTANCE) {
-			panicAmplitude = PANIC_DISTANCE / birdDistance;
+			panicAmplitude = PANIC_DISTANCE / birdDistance + MIN_AMPLITUDE;
 			oscillationAmplitude = Math.min(panicAmplitude, jumpMaxDistance);
 			checkJumpOff();
 		} else {
-			oscillationAmplitude = MIN_AMPLITUDE;
+			calm();
 		}
 	}
 
@@ -77,6 +86,7 @@ public class Pointee {
 			ownSquare.getPointees().remove(this);
 			ownSquare = game.getBoard().defineNearestSquare(x, y);
 			ownSquare.getPointees().add(this);
+			centerInSquare();
 		}
 	}
 

@@ -7,16 +7,13 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import task.model.Game;
 
 public class GameViewport extends JPanel implements ActionListener {
-	public static final int TIME_STEP = 30;
+	public static final int TIME_STEP = 20;
 	private Timer timer;
 	private Game game;
 	RenderingHints rh;
