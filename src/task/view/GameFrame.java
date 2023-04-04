@@ -16,7 +16,7 @@ public class GameFrame extends JFrame {
 		setTitle("Pointee game");
 
 		GameControls gc = new GameControls(game);
-		gc.setPreferredSize(new Dimension(150, 0));
+		gc.setPreferredSize(new Dimension(10 + GameControls.CONTROL_WIDTH, 0));
 		add(gc, BorderLayout.LINE_START);
 
 		GameViewport gv = new GameViewport(game);

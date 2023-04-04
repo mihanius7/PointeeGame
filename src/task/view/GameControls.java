@@ -6,13 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import task.game.Game;
 import task.model.BirdStatus;
 
 public class GameControls extends JPanel {
+	public static final int CONTROL_WIDTH = 140;
 	JLabel l1;
 	JButton b1;
 	JButton b2;
@@ -25,7 +28,7 @@ public class GameControls extends JPanel {
 		game.setControls(this);
 
 		l1 = new JLabel("Rounds played: 0");
-		l1.setPreferredSize(new Dimension(140, 32));
+		l1.setPreferredSize(new Dimension(CONTROL_WIDTH, 32));
 		add(l1);
 
 		b1 = new JButton("Send bird");
@@ -34,7 +37,7 @@ public class GameControls extends JPanel {
 				game.getBird().launch();
 			}
 		});
-		b1.setPreferredSize(new Dimension(140, 48));
+		b1.setPreferredSize(new Dimension(CONTROL_WIDTH, 48));
 		b1.setBackground(Color.LIGHT_GRAY);
 		add(b1);
 
@@ -44,17 +47,20 @@ public class GameControls extends JPanel {
 				game.redeemBestCoupon();
 			}
 		});
-		b2.setPreferredSize(new Dimension(140, 24));
+		b2.setPreferredSize(new Dimension(CONTROL_WIDTH, 24));
 		b2.setBackground(Color.LIGHT_GRAY);
 		add(b2);
-		
+
 		b3 = new JButton("New game");
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.newGame();
+				int yes = JOptionPane.showConfirmDialog(null, "Are you sure?");
+				if (yes == JOptionPane.YES_NO_OPTION) {
+					game.newGame();
+				}
 			}
 		});
-		b3.setPreferredSize(new Dimension(140, 24));
+		b3.setPreferredSize(new Dimension(CONTROL_WIDTH, 24));
 		b3.setBackground(Color.LIGHT_GRAY);
 		add(b3);
 	}
