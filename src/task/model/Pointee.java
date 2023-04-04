@@ -7,15 +7,15 @@ import task.view.paintables.PointeeImage;
 
 public class Pointee {
 	public static final double PANIC_DISTANCE = 200;
-	public static final double MIN_AMPLITUDE = 1;
+	public static final double MIN_AMPLITUDE = 0.5;
 	public static final double MIN_FREQUENCY = 2;
 	public static final double MAX_FREQUENCY = 5;
 
 	private BoardSquare ownSquare;
 	private Game game;
 
-	double x;
-	double y;
+	private double x;
+	private double y;
 	private double oscillationAmplitude;
 	private double oscillationFrequency;
 	private short oscillationSign;
@@ -61,9 +61,9 @@ public class Pointee {
 	public void move() {
 		watchForBird();
 		x = ownSquare.x + oscillationAmplitude
-				* Math.cos(Math.toRadians(oscillationFrequency) * game.getPlayingTime() / 1000.0 * oscillationSign);
+				* Math.cos(2 * Math.PI * oscillationFrequency * game.getPlayingTime() / 1000 * oscillationSign);
 		y = ownSquare.y + oscillationAmplitude
-				* Math.sin(Math.toRadians(oscillationFrequency) * game.getPlayingTime() / 1000.0 * oscillationSign);
+				* Math.sin(2 * Math.PI * oscillationFrequency * game.getPlayingTime() / 1000 * oscillationSign);
 	}
 
 	private void watchForBird() {
@@ -76,7 +76,7 @@ public class Pointee {
 				panicAmplitude = jumpMaxDistance;
 			oscillationAmplitude = panicAmplitude;
 			checkJumpOff();
-		} else {
+		} else if (birdDistance > PANIC_DISTANCE) {
 			calm();
 		}
 	}
