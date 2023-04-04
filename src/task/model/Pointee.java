@@ -2,24 +2,24 @@ package task.model;
 
 import java.awt.geom.Point2D;
 
-import task.view.GameViewport;
 import task.view.paintables.Paintable;
 import task.view.paintables.PointeeImage;
 
 public class Pointee {
+	public static final double PANIC_DISTANCE = 200;
+	public static final double MIN_AMPLITUDE = 1;
+	public static final double MIN_FREQUENCY = 2;
+	public static final double MAX_FREQUENCY = 5;
+
 	private BoardSquare ownSquare;
 	private Game game;
-	public static double PANIC_DISTANCE = 200;
-	public static double MIN_AMPLITUDE = 0;
-	public static double MIN_FREQUENCY = 1;
-	public static double MAX_FREQUENCY = 7;
+
 	double x;
 	double y;
-	static double time;
-	double oscillationAmplitude;
-	double oscillationFrequency;
-	short oscillationSign;
-	static double jumpMaxDistance;
+	private double oscillationAmplitude;
+	private double oscillationFrequency;
+	private short oscillationSign;
+	private static double jumpMaxDistance;
 	private Paintable image;
 
 	public Pointee(BoardSquare square, Game game) {
@@ -60,20 +60,21 @@ public class Pointee {
 
 	public void move() {
 		watchForBird();
-		time += GameViewport.TIME_STEP;
-		x = ownSquare.x
-				+ oscillationAmplitude * Math.cos(Math.toRadians(oscillationFrequency) * time / 1000 * oscillationSign);
-		y = ownSquare.y
-				+ oscillationAmplitude * Math.sin(Math.toRadians(oscillationFrequency) * time / 1000 * oscillationSign);
+		x = ownSquare.x + oscillationAmplitude
+				* Math.cos(Math.toRadians(oscillationFrequency) * game.getPlayingTime() / 1000.0 * oscillationSign);
+		y = ownSquare.y + oscillationAmplitude
+				* Math.sin(Math.toRadians(oscillationFrequency) * game.getPlayingTime() / 1000.0 * oscillationSign);
 	}
 
 	private void watchForBird() {
-		double birdDistance = Point2D.distance(x, y, game.bird.x, game.bird.y);
+		double birdDistance = Point2D.distance(x, y, game.getBird().x, game.getBird().y);
 		double panicAmplitude;
 		jumpMaxDistance = game.getBoard().getSquareSize();
 		if (birdDistance <= PANIC_DISTANCE) {
 			panicAmplitude = PANIC_DISTANCE / birdDistance + MIN_AMPLITUDE;
-			oscillationAmplitude = Math.min(panicAmplitude, jumpMaxDistance);
+			if (panicAmplitude > jumpMaxDistance)
+				panicAmplitude = jumpMaxDistance;
+			oscillationAmplitude = panicAmplitude;
 			checkJumpOff();
 		} else {
 			calm();

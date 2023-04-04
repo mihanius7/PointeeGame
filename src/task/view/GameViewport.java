@@ -13,7 +13,7 @@ import javax.swing.Timer;
 import task.model.Game;
 
 public class GameViewport extends JPanel implements ActionListener {
-	public static final int TIME_STEP = 20;
+	public static final int TIME_STEP = 25;
 	private Timer timer;
 	private Game game;
 	RenderingHints rh;
@@ -35,7 +35,7 @@ public class GameViewport extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if (src == timer) {
-			game.updateEntities();
+			game.process();
 			repaint();
 		}
 	}

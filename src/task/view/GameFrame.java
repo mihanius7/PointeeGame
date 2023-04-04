@@ -23,6 +23,7 @@ public class GameFrame extends JFrame {
 		add(gv, BorderLayout.CENTER);
 
 		setBounds(0, 0, VIEW_WIDTH, VIEW_HEIGHT + 40);
+		setLocationRelativeTo(null);
 		setResizable(false);
 	}
 

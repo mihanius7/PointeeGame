@@ -7,13 +7,15 @@ import javax.swing.JOptionPane;
 
 import task.view.GameControls;
 import task.view.GameFrame;
+import task.view.GameViewport;
 
 public class Game {
-	Board board;
-	Bird bird;
-	GameControls controls;
+	private Board board;
+	private Bird bird;
+	private GameControls controls;
 	private int roundsPlayed;
 	private boolean isPlaying;
+	private double time;
 	public static final int BOARD_SIZE = 15;
 	public static final int ROUNDS_MAX_NUMBER = 100;
 	public static final int[] ROUNDS_FOR_REDEEM = { 25, 50, 100 };
@@ -31,6 +33,7 @@ public class Game {
 	public void newGame() {
 		board = new Board(BOARD_SIZE, this);
 		roundsPlayed = 0;
+		time = 0;
 		isPlaying = true;
 		bird = new Bird(board);
 		bird.toStartPostion();
@@ -48,10 +51,11 @@ public class Game {
 		return roundsPlayed;
 	}
 
-	public void updateEntities() {
+	public void process() {
+		time += GameViewport.TIME_STEP;
 		if (isPlaying) {
 			bird.fly();
-			board.alive();
+			board.aliveSquares();
 			checkBirdStatus();
 			if (controls != null)
 				controls.updateControls();
@@ -60,6 +64,10 @@ public class Game {
 
 	public void setControls(GameControls controls) {
 		this.controls = controls;
+	}	
+
+	public double getPlayingTime() {
+		return time;
 	}
 
 	public void checkBirdStatus() {

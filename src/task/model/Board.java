@@ -9,14 +9,14 @@ import task.view.paintables.BoardImage;
 import task.view.paintables.Paintable;
 
 public class Board {
-	private static final int DEFAULT_SIZE = 600;
+	public static final int DEFAULT_SIZE = 600;
 	private List<BoardSquare> squares;
 	private Paintable image;
 	private Game game;
+	private int squareSize;
 	int cornerX;
 	int cornerY;
 	int size;
-	int squareSize;
 
 	public Board(int squaresOnSide, Game game) {
 		super();
@@ -58,7 +58,7 @@ public class Board {
 		return squareSize;
 	}
 
-	public void alive() {
+	public void aliveSquares() {
 		for (BoardSquare bs : squares) {
 			bs.movePointees();
 		}
