@@ -10,9 +10,9 @@ public class Bird {
 	double y;
 	double velocity;
 	double angle;
-	BirdStatus status;
-	Paintable image;
-	Board board;
+	private BirdStatus status;
+	private Paintable image;
+	private Board board;
 	public static final double MAX_VELOCITY = 500;
 	public static final double BOUNDARY_MARGIN = 100;
 

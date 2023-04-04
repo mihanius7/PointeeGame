@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import task.game.Game;
 import task.view.GameFrame;
 import task.view.paintables.BoardImage;
 import task.view.paintables.Paintable;

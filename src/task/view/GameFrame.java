@@ -5,7 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import task.model.Game;
+import task.game.Game;
 
 public class GameFrame extends JFrame {
 

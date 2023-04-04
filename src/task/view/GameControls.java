@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import task.game.Game;
 import task.model.BirdStatus;
-import task.model.Game;
 
 public class GameControls extends JPanel {
 	JLabel l1;

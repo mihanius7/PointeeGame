@@ -3,6 +3,8 @@ package task.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import task.game.Game;
+
 public class BoardSquare {
 	int x;
 	int y;

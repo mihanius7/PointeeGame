@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import task.model.Bird;
+import task.model.BirdStatus;
 
 public class BirdImage implements Paintable {
 	public static final int BIRD_SIZE = 15;
@@ -15,7 +16,8 @@ public class BirdImage implements Paintable {
 	}
 
 	public void paintOn(Graphics g) {
-		drawVelocityVector(g);
+		if (bird.getStatus() == BirdStatus.READY_TO_FLY)
+			drawVelocityVector(g);
 		g.setColor(Color.BLACK);
 		g.fillOval((int) Math.round(bird.getX() - BIRD_SIZE / 2), (int) Math.round(bird.getY() - BIRD_SIZE / 2),
 				BIRD_SIZE, BIRD_SIZE);

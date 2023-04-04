@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import task.model.Pointee;
 
 public class PointeeImage implements Paintable {
-	public static final int POINTEE_SIZE = 8;
+	public static final int POINTEE_SIZE = 9;
 	private static Color color = Color.BLUE;
 	private Pointee pointee;
 

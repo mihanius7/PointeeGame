@@ -1,6 +1,6 @@
 package task;
 
-import task.model.Game;
+import task.game.Game;
 
 public class Start {
 

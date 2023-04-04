@@ -1,10 +1,14 @@
-package task.model;
+package task.game;
 
 import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import task.model.Bird;
+import task.model.BirdStatus;
+import task.model.Board;
+import task.model.Coupon;
 import task.view.GameControls;
 import task.view.GameFrame;
 import task.view.GameViewport;

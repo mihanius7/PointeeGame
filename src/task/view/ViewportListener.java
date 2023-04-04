@@ -3,14 +3,12 @@ package task.view;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import task.model.Game;
+import task.game.Game;
 
 public class ViewportListener extends MouseAdapter {
-	int x1;
-	int y1;
-	int dx;
-	int dy;
-	Game game;
+	private int dx;
+	private int dy;
+	private Game game;
 
 	public ViewportListener(Game game) {
 		this.game = game;
