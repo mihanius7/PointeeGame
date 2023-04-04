@@ -10,17 +10,16 @@ public class Bird {
 	double y;
 	double velocity;
 	double angle;
-	BirdStatus status;
-	Paintable image;
-	double boundaryMargin;
+	private BirdStatus status;
+	private Paintable image;
 	private Board board;
-	public static final double MAX_VELOCITY = 400;
+	public static final double MAX_VELOCITY = 500;
+	public static final double BOUNDARY_MARGIN = 100;
 
 	public Bird(Board board) {
 		super();
 		this.image = new BirdImage(this);
 		this.board = board;
-		boundaryMargin = 100;
 		status = BirdStatus.CREATED;
 	}
 
@@ -52,14 +51,14 @@ public class Bird {
 	}
 
 	private boolean isOutOfBoundary() {
-		return (x > board.cornerX + board.size + boundaryMargin || x < board.cornerX - boundaryMargin
-				|| y > board.cornerY + board.size + boundaryMargin || y < board.cornerY - boundaryMargin);
+		return (x > board.cornerX + board.size + BOUNDARY_MARGIN || x < board.cornerX - BOUNDARY_MARGIN
+				|| y > board.cornerY + board.size + BOUNDARY_MARGIN || y < board.cornerY - BOUNDARY_MARGIN);
 	}
 
 	public void toStartPostion() {
-		x = board.cornerX - boundaryMargin;
+		x = board.cornerX - BOUNDARY_MARGIN;
 		y = GameFrame.VIEW_HEIGHT / 2;
-		velocity = 200;
+		velocity = 250;
 		angle = 0;
 		status = BirdStatus.READY_TO_FLY;
 	}
