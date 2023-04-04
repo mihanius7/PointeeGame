@@ -14,7 +14,7 @@ public class Bird {
 	Paintable image;
 	double boundaryMargin;
 	private Board board;
-	public static final double MAX_VELOCITY = 500;
+	public static final double MAX_VELOCITY = 400;
 
 	public Bird(Board board) {
 		super();
@@ -77,12 +77,14 @@ public class Bird {
 	}
 
 	public void setVelocity(int vx, int vy) {
-		velocity = Math.min(Math.sqrt(vx * vx + vy * vy), MAX_VELOCITY);
-		angle = Math.atan2(vy, vx);
+		if (status != BirdStatus.FLYING) {
+			velocity = Math.min(Math.sqrt(vx * vx + vy * vy), MAX_VELOCITY);
+			angle = Math.atan2(vy, vx);
+		}
 	}
 
 	public void setXY(int newX, int newY) {
-		if (!board.isPointAboveBoard(newX, newY)) {
+		if (status != BirdStatus.FLYING && !board.isPointAboveBoard(newX, newY)) {
 			x = newX;
 			y = newY;
 		}

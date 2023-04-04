@@ -32,6 +32,8 @@ public class Game {
 		board = new Board(BOARD_SIZE, this);
 		roundsPlayed = 0;
 		isPlaying = true;
+		bird = new Bird(board);
+		bird.toStartPostion();
 	}
 
 	public Bird getBird() {
@@ -92,7 +94,7 @@ public class Game {
 		if (isRedeemPermitted()) {
 			coupon = board.defineBestSquare().getCoupon();
 			JOptionPane.showInternalMessageDialog(null,
-					"You redeemed a coupon with worth " + coupon.getWorth() + " points.", "Condratulations",
+					"Get your a coupon with worth " + coupon.getWorth() + " points!", "Condratulations",
 					JOptionPane.INFORMATION_MESSAGE);
 			newGame();
 			newGameMessage();
@@ -105,7 +107,7 @@ public class Game {
 	}
 
 	private void newGameMessage() {
-		JOptionPane.showInternalMessageDialog(null, "Send a bird in any direction by mouse clicking and dragging",
+		JOptionPane.showInternalMessageDialog(null, "Send a bird in any direction and velocity by mouse clicking and dragging",
 				"New game", JOptionPane.INFORMATION_MESSAGE);
 	}
 
